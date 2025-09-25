@@ -1,0 +1,33 @@
+{
+  "name": "elderon-platform",
+  "version": "1.0.0",
+  "description": "Enterprise system evolution platform with AI-powered modernization",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "docker:build": "turbo run docker:build",
+    "docker:push": "turbo run docker:push",
+    "deploy:staging": "npm run build && npm run docker:push",
+    "deploy:production": "npm run build && npm run docker:push -- --production"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "packageManager": "npm@9.0.0"
+}
