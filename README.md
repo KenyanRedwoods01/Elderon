@@ -111,8 +111,10 @@ docker-compose up -d
 🔥 Built with ❤️ by **RedwoodsKenyan**
 ✨ Evolving enterprises with AI-powered modernization ✨
 
+## 📊 Repo Activity
 
-## Repo Activity
+<div align="center">
 
-<img width="100%" src="https://repobeats.axiom.co/api/embed/e490bf139d795dc77416666fd4150cf8d719de71.svg" />
+<img width="100%" src="https://repobeats.axiom.co/api/embed/e490bf139d795dc77416666fd4150cf8d719de71.svg" alt="Repobeats analytics image" />
 
+</div>
