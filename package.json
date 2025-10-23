@@ -4,7 +4,22 @@
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "dev": "echo 'Elderon Platform'",
-    "build": "echo 'Building...'"
+    "dev": "concurrently \"npm run dev --workspace=@elderonai/landing\" \"npm run dev --workspace=@elderonai/web\" \"npm run dev --workspace=@elderonai/admin\"",
+    "build": "npm run build:packages && npm run build:apps",
+    "build:packages": "npm run build --workspace=@elderonai/ui-components",
+    "build:apps": "npm run build --workspace=@elderonai/landing && npm run build --workspace=@elderonai/web && npm run build --workspace=@elderonai/admin",
+    "start": "concurrently \"npm run start --workspace=@elderonai/landing\" \"npm run start --workspace=@elderonai/web\" \"npm run start --workspace=@elderonai/admin\"",
+    "lint": "npm run lint --workspaces",
+    "test": "npm run test --workspaces",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/.next packages/*/dist",
+    "type-check": "npm run type-check --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   }
 }
