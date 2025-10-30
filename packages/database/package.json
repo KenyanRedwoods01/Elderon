@@ -1,0 +1,23 @@
+{
+  "name": "@elderonai/database",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "migrate": "drizzle-kit push:pg",
+    "migrate:generate": "drizzle-kit generate:pg",
+    "seed": "tsx src/seed.ts",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "drizzle-orm": "^0.29.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.6",
+    "@types/pg": "^8.10.9",
+    "tsx": "^4.7.0"
+  }
+}

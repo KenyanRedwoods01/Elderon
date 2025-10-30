@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: elderonai_postgres
+    environment:
+      POSTGRES_DB: elderonai_dev
+      POSTGRES_USER: elderonai
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U elderonai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - elderonai-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: elderonai_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - elderonai-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: elderonai_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@elderon.ai
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - elderonai-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: elderonai_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: elderonai
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - elderonai-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  rabbitmq_data:
+
+networks:
+  elderonai-network:
+    driver: bridge
